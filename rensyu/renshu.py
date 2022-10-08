@@ -14,11 +14,11 @@ def transform_maker(key, object):
 def shape_maker(object):
     shape = ET.Element('shape')
     appearance = ET.SubElement(shape, 'appearance')
-    material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0', 'transparency': '0.99'})
+    material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0', 'transparency': '0.9'})
     material.text = ' '
     a = object["bboxSize"]
     size = str(float(a[0]))+","+str(float(a[1]))+","+str(float(a[2]))
-    box = ET.SubElement(shape, 'box', {'size': size})
+    box = ET.SubElement(shape, 'box', {'size': size, 'solid': 'false'})
 
     return shape
 
