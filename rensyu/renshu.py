@@ -1,11 +1,10 @@
-from turtle import shape
 import xml.etree.ElementTree as ET
 import json
 import pprint
 
 
-def transform_maker(object):
-    transform = ET.Element('transform', {'DEF': object.keys()[0]})
+def transform_maker(key, object):
+    transform = ET.Element('transform', {'DEF': key})
     shape = shape_maker(object)
     transform.append(shape)
 
@@ -15,8 +14,8 @@ def transform_maker(object):
 def shape_maker(object):
     shape = ET.Element('shape')
     appearance = ET.SubElement(shape, 'appearance')
-    material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0'})
-    material.text(' ')
+    material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0', 'transparency': '0.99'})
+    material.text = ' '
     a = object["bboxSize"]
     size = str(float(a[0]))+","+str(float(a[1]))+","+str(float(a[2]))
     box = ET.SubElement(shape, 'box', {'size': size})
@@ -93,8 +92,8 @@ for file in fileList:
 
 # nodeを作ります．
 for o in objectDict:
-    transform = transform_maker(o)
+    transform = transform_maker(o, objectDict[o])
     scene.append(transform)
 
 tree = ET.ElementTree(html)
-# tree.write('test.html', encoding='utf-8')
+tree.write('test.html', encoding='utf-8')
