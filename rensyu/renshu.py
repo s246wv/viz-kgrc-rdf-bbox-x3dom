@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import json, pprint
 
 def transform_maker(state):
     # TODO
@@ -47,6 +48,24 @@ descriptionLabel.text = "ろーれむいぷさむどろーるしっとあめっ�
 x3d = ET.SubElement(body, 'x3d', {'width':'1920px','height':'1080px'})
 scene = ET.SubElement(x3d, 'scene')
 
+## first situation
+# sizeをもらわないといけない．
+with open("situation_1.srj","r") as f:
+    firstSituation = json.load(f)
+
+stateList = set()
+a = []
+
+for row in firstSituation["results"]["bindings"]:
+    stateList.add(row["state"]["value"])
+    a.append(row["state"]["value"])
+
+print(len(stateList))
+print(len(a))
+
+## 残りのsituation
+# sizeは一個目そのまま．繰り返しで足していく．
+
 
 tree = ET.ElementTree(html)
-tree.write('test.html', encoding='utf-8')
+# tree.write('test.html', encoding='utf-8')
