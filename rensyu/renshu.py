@@ -1,23 +1,27 @@
-from re import S
+from turtle import shape
 import xml.etree.ElementTree as ET
 import json
 import pprint
 
 
-def transform_maker(state):
-    # TODO
-    pass
+def transform_maker(object):
+    transform = ET.Element('transform', {'DEF': object.keys()[0]})
+    shape = shape_maker(object)
+    transform.append(shape)
+
+    return transform
 
 
-def shape_maker(objectType):
-    # TODO appearanceとmaterialまでセットで
-    pass
+def shape_maker(object):
+    shape = ET.Element('shape')
+    appearance = ET.SubElement(shape, 'appearance')
+    material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0'})
+    material.text(' ')
+    a = object["bboxSize"]
+    size = str(float(a[0]))+","+str(float(a[1]))+","+str(float(a[2]))
+    box = ET.SubElement(shape, 'box', {'size': size})
 
-
-def box_maker(size):
-    # TODO ここでsizeが必要だった．．
-    pass
-
+    return shape
 
 def timeSensor_maker():
     # TODO 決め打ちで．
@@ -88,7 +92,9 @@ for file in fileList:
 # pprint.pprint(objectDict)
 
 # nodeを作ります．
-
+for o in objectDict:
+    transform = transform_maker(o)
+    scene.append(transform)
 
 tree = ET.ElementTree(html)
 # tree.write('test.html', encoding='utf-8')
