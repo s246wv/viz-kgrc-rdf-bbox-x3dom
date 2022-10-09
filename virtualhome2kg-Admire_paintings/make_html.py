@@ -1,6 +1,5 @@
 import xml.etree.ElementTree as ET
 import json
-import pprint
 
 
 def transform_maker(key, object):
@@ -125,4 +124,4 @@ for o in objectDict:
     
 
 tree = ET.ElementTree(html)
-tree.write('test.html', encoding='utf-8')
+tree.write('virtualhome2kg-Admire_paintings.html', encoding='utf-8')
