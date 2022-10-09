@@ -14,7 +14,7 @@ def transform_maker(key, object):
 def shape_maker(object):
     shape = ET.Element('shape')
     appearance = ET.SubElement(shape, 'appearance')
-    material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0', 'transparency': '0.9'})
+    material = ET.SubElement(appearance, 'material', {'diffuseColor': '0.1 0 0', 'transparency': '0.9'})
     material.text = ' '
     a = object["bboxSize"]
     size = str(float(a[0]))+","+str(float(a[1]))+","+str(float(a[2]))
@@ -22,20 +22,30 @@ def shape_maker(object):
 
     return shape
 
-def timeSensor_maker():
-    # TODO 決め打ちで．
-    pass
+def timeSensor_maker(num):
+    timeSensor = ET.Element('timeSensor', {'DEF': 'time', 'cycleInterval': str(num), 'loop': 'true'})
+
+    return timeSensor
 
 
-def PositionInterpolator_maker(state):
-    # TODO
-    pass
+def PositionInterpolator_maker(key, object):
+    keys = ""
+    for k in object["key"]:
+        keys = keys + "," + str(k)
+    keyValue = ""
+    for kv in object["keyValue"]:
+        keyValue = keyValue + str(float(kv[0]))+" "+str(float(kv[1]))+" "+str(float(kv[2])) + "  "
+    positionInterpolator = ET.Element('PositionInterpolator', {'DEF': "move"+key, 'key': keys, 'keyValue': keyValue})
+
+    return positionInterpolator
 
 
-def Route_maker():
-    # TODO
-    pass
+def Route_maker(key, object):
+    route1 = ET.Element('Route', {'fromNode': 'time', 'fromField': 'fraction_changed', 'toNode': "move"+key, 'toField': 'set_fraction'})
+    route2 = ET.Element('Route', {'fromNode': "move"+key, 'fromField': 'value_changed', 'toNode': key, 'toField': 'translation'}) 
+    routes = [route1, route2]
 
+    return routes
 
 html = ET.Element('html')
 # headべた書き
@@ -94,6 +104,14 @@ for file in fileList:
 for o in objectDict:
     transform = transform_maker(o, objectDict[o])
     scene.append(transform)
+    positionInterpolator = PositionInterpolator_maker(o, objectDict[o])
+    scene.append(positionInterpolator)
+    routes = Route_maker(o, objectDict[o])
+    for route in routes:
+        scene.append(route)
+    
+timeSensor = timeSensor_maker(4)
+scene.append(timeSensor)
 
 tree = ET.ElementTree(html)
 tree.write('test.html', encoding='utf-8')
