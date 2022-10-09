@@ -74,11 +74,12 @@ body = ET.SubElement(html, 'body')
 sectionLabel = ET.SubElement(body, 'h1')
 sectionLabel.text = "virtualhome2kg-Admire_paintings.ttlのbboxを描いてみる"
 descriptionLabel = ET.SubElement(body, 'p')
-descriptionLabel.text = "ろーれむいぷさむどろーるしっとあめっと，こんせくてたーあでぃぴしんぐえりと，せどどあいうすもっどてむぽーるいんしでぃどぅんとうとらぼれえとどろーれまぐなありくあ。"
+descriptionLabel.text = "操作方法は下の方にあります．マウスでくるくる回せます．キャラクターだけ赤色，他は透明な緑色です．動いてますが，動画と時間はあっていません．バウンディングボックスのサイズは初期値のままです．キャラクタがかがんだり方向転換していたりしても変わりません．"
 
 # ここから中身
 x3d = ET.SubElement(body, 'x3d', {'width': '1920px', 'height': '1080px'})
 scene = ET.SubElement(x3d, 'scene')
+ET.SubElement(scene, 'environment', {'smallFeatureCullting': 'true'}).text = " "
 
 # first situation
 # sizeをもらわないといけない．
@@ -122,6 +123,31 @@ for o in objectDict:
     for route in routes:
         scene.append(route)
     
+## 操作方法の説明
+ET.SubElement(body, "h4").text = "操作方法"
+table = ET.SubElement(body, 'table')
+tr = ET.SubElement(table, 'tr')
+ET.SubElement(tr, 'th').text = "機能"
+ET.SubElement(tr, 'th').text = "マウスボタン"
+tbody = ET.SubElement(table, 'tbody')
+tr1 = ET.SubElement(tbody, 'tr')
+ET.SubElement(tr1, 'td').text = "回転"
+ET.SubElement(tr1, 'td').text = "左 / 左 + Shift"
+tr2 = ET.SubElement(tbody, 'tr')
+ET.SubElement(tr2, 'td').text = "パン"
+ET.SubElement(tr2, 'td').text = "真ん中 / 左 + Ctrl"
+tr3 = ET.SubElement(tbody, 'tr')
+ET.SubElement(tr3, 'td').text = "ズーム"
+ET.SubElement(tr3, 'td').text = "右 / ホイール / 左 + Alt"
+tr4 = ET.SubElement(tbody, 'tr')
+ET.SubElement(tr4, 'td').text = "描画対象が真ん中に来るようにする"
+ET.SubElement(tr4, 'td').text = "左をダブルクリック"
+tr5 = ET.SubElement(tbody, 'tr')
+ET.SubElement(tr5, 'td').text = "ビューを初期値に戻す"
+ET.SubElement(tr5, 'td').text = "キーボードのA"
+tr6 = ET.SubElement(tbody, 'tr')
+ET.SubElement(tr6, 'td').text = "小さいものも表示する"
+ET.SubElement(tr6, 'td').text = "キーボードのS"
 
 tree = ET.ElementTree(html)
 tree.write('virtualhome2kg-Admire_paintings.html', encoding='utf-8')
