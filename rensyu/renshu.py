@@ -14,16 +14,18 @@ def transform_maker(key, object):
 def shape_maker(object):
     shape = ET.Element('shape')
     appearance = ET.SubElement(shape, 'appearance')
-    material = ET.SubElement(appearance, 'material', {'diffuseColor': '0.1 0 0', 'transparency': '0.9'})
+    material = ET.SubElement(appearance, 'material', {'diffuseColor': '0 1 0', 'transparency': '0.9'})
     material.text = ' '
     a = object["bboxSize"]
     size = str(float(a[0]))+","+str(float(a[1]))+","+str(float(a[2]))
     box = ET.SubElement(shape, 'box', {'size': size, 'solid': 'false'})
+    box.text = " "
 
     return shape
 
 def timeSensor_maker(num):
     timeSensor = ET.Element('timeSensor', {'DEF': 'time', 'cycleInterval': str(num), 'loop': 'true'})
+    timeSensor.text = " "
 
     return timeSensor
 
@@ -31,18 +33,21 @@ def timeSensor_maker(num):
 def PositionInterpolator_maker(key, object):
     keys = ""
     for k in object["key"]:
-        keys = keys + "," + str(k)
+        keys = keys + str(k) + " "
     keyValue = ""
     for kv in object["keyValue"]:
         keyValue = keyValue + str(float(kv[0]))+" "+str(float(kv[1]))+" "+str(float(kv[2])) + "  "
     positionInterpolator = ET.Element('PositionInterpolator', {'DEF': "move"+key, 'key': keys, 'keyValue': keyValue})
+    positionInterpolator.text = " "
 
     return positionInterpolator
 
 
-def Route_maker(key, object):
+def Route_maker(key):
     route1 = ET.Element('Route', {'fromNode': 'time', 'fromField': 'fraction_changed', 'toNode': "move"+key, 'toField': 'set_fraction'})
+    route1.text = " "
     route2 = ET.Element('Route', {'fromNode': "move"+key, 'fromField': 'value_changed', 'toNode': key, 'toField': 'translation'}) 
+    route2.text = " "
     routes = [route1, route2]
 
     return routes
@@ -106,7 +111,7 @@ for o in objectDict:
     scene.append(transform)
     positionInterpolator = PositionInterpolator_maker(o, objectDict[o])
     scene.append(positionInterpolator)
-    routes = Route_maker(o, objectDict[o])
+    routes = Route_maker(o)
     for route in routes:
         scene.append(route)
     
