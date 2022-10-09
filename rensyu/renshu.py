@@ -14,7 +14,11 @@ def transform_maker(key, object):
 def shape_maker(object):
     shape = ET.Element('shape')
     appearance = ET.SubElement(shape, 'appearance')
-    material = ET.SubElement(appearance, 'material', {'diffuseColor': '0 1 0', 'transparency': '0.9'})
+    # characterの場合だけ赤色
+    if object["objectType"] == "character":
+        material = ET.SubElement(appearance, 'material', {'diffuseColor': '1 0 0', 'transparency': '0'})
+    else: 
+        material = ET.SubElement(appearance, 'material', {'diffuseColor': '0 1 0', 'transparency': '0.9'})
     material.text = ' '
     a = object["bboxSize"]
     size = str(float(a[0]))+","+str(float(a[1]))+","+str(float(a[2]))
@@ -106,6 +110,10 @@ for file in fileList:
 # pprint.pprint(objectDict)
 
 # nodeを作ります．
+# タイムセンサーが先
+timeSensor = timeSensor_maker(4)
+scene.append(timeSensor)
+# 物は後
 for o in objectDict:
     transform = transform_maker(o, objectDict[o])
     scene.append(transform)
@@ -115,8 +123,6 @@ for o in objectDict:
     for route in routes:
         scene.append(route)
     
-timeSensor = timeSensor_maker(4)
-scene.append(timeSensor)
 
 tree = ET.ElementTree(html)
 tree.write('test.html', encoding='utf-8')
