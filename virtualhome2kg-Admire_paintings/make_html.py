@@ -79,7 +79,7 @@ descriptionLabel.text = "操作方法は下の方にあります．マウスで�
 # ここから中身
 x3d = ET.SubElement(body, 'x3d', {'width': '1920px', 'height': '1080px'})
 scene = ET.SubElement(x3d, 'scene')
-ET.SubElement(scene, 'environment', {'smallFeatureCullting': 'true'}).text = " "
+ET.SubElement(scene, 'environment', {'smallFeatureCulling': 'true'}).text = " "
 
 # first situation
 # sizeをもらわないといけない．
