@@ -13,6 +13,8 @@
 [5] VirtualHome2KG/Ontology, https://github.com/aistairc/VirtualHome2KG/tree/main/ontology Accessed 09 October 2022.  
 [6] x3dom.org, https://www.x3dom.org/ Accessed 09 October 2022.  
 
+## デモ
+![demo](demo.gif)
 
 ## 必要なもの
 - 新しいウェブブラウザ
@@ -39,3 +41,4 @@
 2. `make_html.py`を動かす．
    - 特別なパッケージは必要ないはずです．
    - 1で取得したjsonはvirtualhome2kg-Admire_paintings向けにハードコーディングしてしまっています．他のアクティビティに適用する際には，適宜修正してください．
+   
