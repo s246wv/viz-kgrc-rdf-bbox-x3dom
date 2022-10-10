@@ -15,7 +15,6 @@
 
 ## デモ
 ![demo](demo.gif)
-![元の動画](https://github.com/KnowledgeGraphJapan/KGRC-RDF/blob/kgrc4si/Movie/Admire_paintings1.mp4?raw=true)
 
 ## 必要なもの
 - 新しいウェブブラウザ
