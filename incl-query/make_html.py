@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import json
-
+import urllib.request
+import urllib.parse
 
 def transform_maker(key, object):
     transform = ET.Element('transform', {'DEF': key})
@@ -106,6 +107,27 @@ def usage_maker(body):
     ET.SubElement(tr6, 'td').text = "小さいものも表示する"
     ET.SubElement(tr6, 'td').text = "キーボードのS"
 
+def get_firstSituation(activity_url):
+    with open("query_firstSituation.rq", "r") as f:
+        query = f.read()
+    query = query.replace("PLACE_HOLDER", activity_url)
+    firstSituation = _query(query)
+
+    return firstSituation
+
+def get_nextSituation(previousSituation):
+    with open("query_nextSituation.rq", "r") as f:
+        query = f.read()
+    query = query.replace("PLACE_HOLDER", previousSituation)
+    nextSituation = _query(query)
+
+    return nextSituation
+
+def _query(query):
+    url = "http://localhost:7200/repositories/kgrc2022"
+    hoge = urllib.request.Request(url=url, data="query="+urllib.parse.urlencode(query), headers="Accept:application/x-trig")
+    return hogehoge
+
 def main():
     html = ET.Element('html')
     ## ヘッダとボディの最初
@@ -119,6 +141,8 @@ def main():
 
     # first situation
     # sizeをもらわないといけない．
+    firstSituation = get_firstSituation()
+
     with open("situation_1.srj", "r") as f:
         firstSituation = json.load(f)
 

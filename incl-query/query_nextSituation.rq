@@ -25,6 +25,6 @@ select distinct ?nextSituation ?state ?objectType ?objectLabel ?objectId ?BCX ?B
     ?object a ?objectType;
             rdfs:label ?objectLabel;
             ns1:identifier ?objectId.
-    # ここを手で変えてます．
-    filter(?situation = <http://example.org/virtualhome2kg/instance/home_situation0_admire_paintings_scene1>)
+
+    filter(?situation = PLACE_HOLDER)
 }

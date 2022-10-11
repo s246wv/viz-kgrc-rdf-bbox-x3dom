@@ -33,6 +33,6 @@ select distinct ?firstEvent ?firstSituation ?state ?objectType ?objectLabel ?obj
             rdfs:label ?objectLabel;
             ns1:identifier ?objectId.
 
-    filter(?activity = ex:admire_paintings_scene1)
+    filter(?activity = PLACE_HOLDER)
 
 }
