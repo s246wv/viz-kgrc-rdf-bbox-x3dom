@@ -125,7 +125,9 @@ def get_nextSituation(previousSituation):
 
 def _query(query):
     url = "http://localhost:7200/repositories/kgrc2022"
-    hoge = urllib.request.Request(url=url, data="query="+urllib.parse.urlencode(query), headers="Accept:application/x-trig")
+    data = urllib.parse.urlencode({"query": query, "format":"json"})
+    with urllib.request.urlopen(url+"?"+data) as res:
+        data = res.read()
     return hogehoge
 
 def main():
