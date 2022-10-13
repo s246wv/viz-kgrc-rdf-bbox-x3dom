@@ -26,5 +26,5 @@ select distinct ?nextSituation ?state ?objectType ?objectLabel ?objectId ?BCX ?B
             rdfs:label ?objectLabel;
             ns1:identifier ?objectId.
 
-    filter(?situation = PLACE_HOLDER)
+    filter(?situation = <PLACE_HOLDER>)
 }

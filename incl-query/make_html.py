@@ -124,11 +124,15 @@ def get_nextSituation(previousSituation):
     return nextSituation
 
 def _query(query):
-    url = "http://localhost:7200/repositories/kgrc2022"
-    data = urllib.parse.urlencode({"query": query, "format":"json"})
-    with urllib.request.urlopen(url+"?"+data) as res:
+    ## wslからlocalhostにアクセスしようとすると拒否される😫
+    # url = "http://localhost:7200/repositories/kgrc2022"
+    ## お借りします🙇‍♂️
+    url = "http://kgrc4si.ml:7200/repositories/KGRC4SIv0"
+    encoded_query = urllib.parse.urlencode({"query": query})
+    req = urllib.request.Request(url=url+"?"+encoded_query, headers={"Accept":"application/json"})
+    with urllib.request.urlopen(req) as res:
         data = res.read()
-    return hogehoge
+    return json.loads(data)
 
 def main():
     html = ET.Element('html')
@@ -143,10 +147,8 @@ def main():
 
     # first situation
     # sizeをもらわないといけない．
-    firstSituation = get_firstSituation()
-
-    with open("situation_1.srj", "r") as f:
-        firstSituation = json.load(f)
+    activity_url = "ex:admire_paintings_scene1"
+    firstSituation = get_firstSituation(activity_url)
 
     objectDict = {}
 
@@ -157,17 +159,19 @@ def main():
             "key": [0],  # ここもappendでkeyのlengthを追加する．
             "objectType": row["objectLabel"]["value"],
         }
-
+    current_situation = firstSituation["results"]["bindings"][0]["firstSituation"]["value"]
 
     # 残りのsituation
     # sizeは一個目そのまま．繰り返しで足していく．
-    fileList = ["situation_2.srj", "situation_3.srj", "situation_4.srj"]
-    for file in fileList:
-        with open(file, "r") as f:
-            nextSituation = json.load(f)
-        for row in nextSituation["results"]["bindings"]:
-            objectDict[row["objectLabel"]["value"] + row["objectId"]["value"]]["keyValue"].append((row["BCX"]["value"], row["BCY"]["value"], row["BCZ"]["value"]))
-            objectDict[row["objectLabel"]["value"] + row["objectId"]["value"]]["key"].append(len(objectDict[row["objectLabel"]["value"] + row["objectId"]["value"]]["key"]))
+    while True:
+        nextSituation = get_nextSituation(current_situation)
+        if len(nextSituation["results"]["bindings"]) != 0:
+            for row in nextSituation["results"]["bindings"]:
+                objectDict[row["objectLabel"]["value"] + row["objectId"]["value"]]["keyValue"].append((row["BCX"]["value"], row["BCY"]["value"], row["BCZ"]["value"]))
+                objectDict[row["objectLabel"]["value"] + row["objectId"]["value"]]["key"].append(len(objectDict[row["objectLabel"]["value"] + row["objectId"]["value"]]["key"]))
+            current_situation = nextSituation["results"]["bindings"][0]["nextSituation"]["value"]
+        else:
+            break
 
     # pprint.pprint(objectDict)
 
