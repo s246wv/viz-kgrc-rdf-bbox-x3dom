@@ -22,6 +22,6 @@
 4. htmlファイルを開くと特定のシーンの3次元での可視化結果が得られます．
 
 ## 謝辞
-素晴らしいノートブックを作ってくださった@YE-WIN-Unityに感謝します．  
+素晴らしいノートブックを作ってくださった[YE-WIN-Unity](https://github.com/YE-WIN-Unity)に感謝します．  
 また，「ナレッジグラフ推論チャレンジ【実社会版】」という素晴らしいプロジェクトにも感謝しています．このリポジトリは、プロジェクトの[データセット](https://github.com/KnowledgeGraphJapan/KGRC-RDF/tree/kgrc4si)を利用することを想定しています．  
 可視化部分は[x3dom tech](https://www.x3dom.org/)を使って実装しています．本プロジェクトにも感謝します．
