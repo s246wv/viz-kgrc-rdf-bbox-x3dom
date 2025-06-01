@@ -1,4 +1,4 @@
-# viz-kgrc-rdf-bbox-x3dom
+# viz-kgrc-rdf-bbox-x3dom:  X3DOMを用いた知識グラフの可視化
 
 ## 使い方
 
@@ -20,8 +20,12 @@
    2. 2,3行目はあなたのクレデンシャル情報です．ユーザ名とパスワード．
 2. ノートブックを動かすと，htmlファイルが手に入ります．
 4. htmlファイルを開くと特定のシーンの3次元での可視化結果が得られます．
+  - htmlファイルの使い方については、(virtualhome2kg-Admire_paintings/README.md)[virtualhome2kg-Admire_paintings/README.md]を御覧ください。
 
 ## 謝辞
-素晴らしいノートブックを作ってくださった[YE-WIN-Unity](https://github.com/YE-WIN-Unity)に感謝します．  
+素晴らしいノートブックを作ってくださった[dev-ye](https://github.com/dev-ye)に感謝します．  
 また，「ナレッジグラフ推論チャレンジ【実社会版】」という素晴らしいプロジェクトにも感謝しています．このリポジトリは、プロジェクトの[データセット](https://github.com/KnowledgeGraphJapan/KGRC-RDF/tree/kgrc4si)を利用することを想定しています．  
 可視化部分は[x3dom tech](https://www.x3dom.org/)を使って実装しています．本プロジェクトにも感謝します．
+
+## License
+このリポジトリのライセンスはCCBY4.0ライセンスです（詳細は[LICENSEファイル](LICENSE.md)をご覧ください）。

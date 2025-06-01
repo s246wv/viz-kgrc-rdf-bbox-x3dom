@@ -1,4 +1,4 @@
-# viz-kgrc-rdf-bbox-x3dom
+# viz-kgrc-rdf-bbox-x3dom: Knowledge Graph Visualization using X3DOM
 
 ## Usage
 
@@ -22,6 +22,9 @@
 3. After open the html file, you can get 3D visualization of the specific scene.
 
 ## Acknowledgement
-I would like to thank [YE-WIN-Unity](https://github.com/YE-WIN-Unity) for creating great notebook.  
+I would like to thank [dev-ye](https://github.com/dev-ye) for creating great notebook.  
 I am also grateful to the great project "Knowledge Graph Reasoning Challenge for Social Issue". This repository is intended to use [the dataset](https://github.com/KnowledgeGraphJapan/KGRC-RDF/tree/kgrc4si) from the project.  
 The visualization part is implemented by using [x3dom tech](https://www.x3dom.org/). I also thank the great project.  
+
+## LICENSE
+This repository is licensed under CCBY4.0 License (see [LICENSE file](LICENSE.md) for details)
